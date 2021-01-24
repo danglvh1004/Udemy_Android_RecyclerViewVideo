@@ -15,9 +15,15 @@ import java.util.ArrayList;
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder> {
 
     private ArrayList<Person> people;
+    ItemClicked activity;
+
+    public interface ItemClicked {
+        void onItemClicked(int index);
+    }
 
     public PersonAdapter(Context context, ArrayList<Person> list) {
         people = list;
+        activity = (ItemClicked) context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -35,6 +41,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
 
+                    activity.onItemClicked(people.indexOf((Person) view.getTag()));
                 }
             });
         }
